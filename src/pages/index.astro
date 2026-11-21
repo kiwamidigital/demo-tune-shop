@@ -1,11 +1,50 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const shopName="Apex Garage";
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<title>{shopName} | Performance Tuning Sydney </title>
+	</head>
+	<body>
+		<section class="hero">
+			<h1>{shopName}</h1>
+			<p>Performance tuning and servicing in Sydney.</p>
+			<a href="#book" class="btn">Book a Service</a>
+		</section>
+	</body>
+</html>
+
+<style>
+	body {
+		margin: 0;
+		background-color: #0a0a0a;
+		color: white;
+		font-family: system-ui, sans-serif;
+	}
+
+
+.hero {
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+}
+h1 {
+	font-size: 4rem;
+	text-transform: uppercase;
+}
+
+.btn {
+	background-color: #e10600;
+	color: white;
+	padding: 1rem 2rem;
+	text-decoration: none;
+	font-weight: bold;
+}
+</style>
+
