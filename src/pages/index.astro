@@ -1,17 +1,10 @@
 ---
+import Layout from '../layouts/Layout.astro';
 const shopName="Apex Garage";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<title>{shopName} | Performance Tuning Sydney </title>
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-   	 	<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet" />
-	</head>
-	<body>
-		<section class="hero">
+<Layout title={`${shopName} | Performance Tuning Sydney`}>
+	<section class="hero">
 			<h1>{shopName}</h1>
 			<p>Performance tuning and servicing in Sydney.</p>
 			<div class="actions">
@@ -19,7 +12,7 @@ const shopName="Apex Garage";
 				<a href="sms:+61400000000" class="btn btn-outline">Chat to Us</a>
 			</div>
 		</section>
-		<section class="services">
+		<section class="services" id="services">
 			<h2>Built to Perform</h2>
 			<div class="grid">
 				<div class="card tall">
@@ -39,18 +32,9 @@ const shopName="Apex Garage";
 			</div>
 			</div>
 		</section>
-	</body>
-</html>
+</Layout>
 
 <style>
-	body {
-		margin: 0;
-		background-color: #0a0a0a;
-		color: white;
-		font-family: system-ui, sans-serif;
-	}
-
-
 .hero {
 	min-height: 66vh;
 	display: flex;
@@ -77,6 +61,7 @@ h1 {
 	font-weight: bold;
 	border: 2px solid #e10600;
 	border-radius: 8px;
+	transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
 }
 .services {
 	padding: 4rem 2rem;
@@ -91,7 +76,8 @@ h2 {
 .grid {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
-	gap: 1.5rem;
+	column-gap: 3rem;
+	row-gap: 2rem;
 }
 .card {
 	background: #151515;
@@ -106,18 +92,14 @@ h2 {
 .card h3 {
 	margin: 0;
 	padding: 1rem 1rem 0;
-	text-transform: uppercase
+	text-transform: uppercase;
 }
 .card p {
 	padding: 0 1rem 1.5rem;
 	color: #bbbbbb;
 }
-.card p {
-	padding: 0 1re, 1.5rem;
-	color: #bbbbbb;
-}
 .card.wide {
-	grid-column: 1 / -1;;
+	grid-column: 1 / -1;
 }
 .card.wide img {
 	height: 350px;
@@ -129,21 +111,31 @@ h2 {
 	.grid {
 		grid-template-columns: 1fr;
 	}
-	card.tall img {
+	.card.tall img {
 		height: 450px;
 	}
 }
 .btn-outline {
-	background-color: rgba(255, 6, 0, 0.35);
+	background-color: rgba(225, 6, 0, 0.35);
 	border: 2px solid #e10600;
-	background-filter: blur(6px);
+	backdrop-filter: blur(6px);
 }
 .actions {
 	display: flex;
 	gap: 1rem;
 	flex-wrap: wrap;
-	Justify-content: center;
+	justify-content: center;
 	margin-top: 1rem;
+}
+
+.btn:hover {
+	transform: translateY(-3px);
+	background-color: rgba(225, 6, 0, 0.35);
+	backdrop-filter: blur(6px);
+	box-shadow: 0 8px 20px rgba(225, 6, 0, 0.4);
+}
+.btn-outline:hover {
+	background-color: rgba(225, 6, 0, 0.6);
 }
 </style>
 
