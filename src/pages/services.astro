@@ -1,11 +1,50 @@
 ---
 import Layout from "../layouts/Layout.astro";
+
+// All 8 services live here. To change a card, edit its line.
+// Photos go in public/images.
+const services = [
+	{ title: "Logbook Servicing", image: "/images/logbookServicing.avif" },
+	{ title: "Tuning and Dyno", image: "/images/tuningAndDyno.avif" },
+	{ title: "Custom Builds", image: "/images/customBuilds.avif" },
+	{ title: "Track Prep", image: "/images/trackPrep.avif" },
+	{ title: "Brakes and Suspension", image: "/images/brakesAndSuspension.avif" },
+	{ title: "Pink Slips and Rego", image: "/images/pinkSlipsRego.avif" },
+	{ title: "Detailing", image: "/images/detailing.avif" },
+	{ title: "Diagnostics", image: "/images/diagnostics.avif" },
+];
 ---
 
 <Layout title="Services | Apex Garage">
 	<section class="page-header">
 		<p class="eyebrow">What we do</p>
 		<h1>Our Services</h1>
+	</section>
+
+	<section class="service-grid">
+		{services.map((service) => (
+			<a href="#" class="service-card">
+				<div class="image-wrap">
+					<img src={service.image} alt={service.title} />
+				</div>
+				<div class="service-title">
+					<span>{service.title}</span>
+					<span class="arrow">→</span>
+				</div>
+			</a>
+		))}
+	</section>
+
+	<section class="not-sure">
+		<div class="not-sure-text">
+			<h2>Not sure what you need?</h2>
+			<p>Tell us what you drive and we'll point you in the right direction.</p>
+		</div>
+		<form class="car-form" id="car-form">
+			<label for="car" class="visually-hidden">Your car's make and model</label>
+			<input type="text" id="car" name="car" placeholder="e.g. 2006 Civic Type R" required />
+			<button type="submit" class="team-btn">Talk to our Team →</button>
+		</form>
 	</section>
 </Layout>
 
@@ -28,4 +67,181 @@ import Layout from "../layouts/Layout.astro";
 		font-size: 4rem;
 		margin: 0.5rem 0 0;
 	}
+
+	/* 4 across on laptops */
+	.service-grid {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 1rem 2rem 4rem;
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: 1.25rem;
+	}
+
+	.service-card {
+		display: block;
+		background-color: #151515;
+		border: 1px solid #222222;
+		border-radius: 8px;
+		overflow: hidden;
+		color: white;
+		text-decoration: none;
+		transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+	}
+	.image-wrap {
+		aspect-ratio: 4 / 3;
+		overflow: hidden;
+	}
+	.image-wrap img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		display: block;
+		filter: brightness(0.85);
+		transition: transform 0.4s ease, filter 0.4s ease;
+	}
+	.service-title {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 1rem 1.25rem;
+		font-weight: bold;
+	}
+	.arrow {
+		transition: transform 0.25s ease;
+	}
+
+	/* Hover: lift the card, zoom the photo, slide the arrow */
+	.service-card:hover {
+		transform: translateY(-6px);
+		border-color: #e10600;
+		box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+	}
+	.service-card:hover img {
+		transform: scale(1.06);
+		filter: brightness(1);
+	}
+	.service-card:hover .arrow {
+		transform: translateX(4px);
+		color: #e10600;
+	}
+
+	/* "Not sure" section */
+	.not-sure {
+		width: calc(100% - 4rem);
+		max-width: calc(1200px - 4rem);
+		margin: 0 auto 6rem;
+		padding: 1.5rem 2rem;
+		box-sizing: border-box;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 2rem;
+		background-color: #151515;
+		border: 1px solid #222222;
+		border-left: 3px solid #e10600;
+		border-radius: 8px;
+	}
+	.not-sure h2 {
+		font-family: "Bebas Neue", sans-serif;
+		font-size: 2rem;
+		letter-spacing: 0.03em;
+		margin: 0;
+	}
+	.not-sure p {
+		color: #bbbbbb;
+		margin: 0.25rem 0 0;
+	}
+	.car-form {
+		display: flex;
+		gap: 0.75rem;
+		flex-shrink: 0;
+	}
+	.car-form input {
+		width: 240px;
+		padding: 0 1rem;
+		background-color: #0a0a0a;
+		border: 2px solid #333333;
+		border-radius: 8px;
+		color: white;
+		font-size: 1rem;
+		transition: border-color 0.2s ease;
+	}
+	.car-form input::placeholder {
+		color: #777777;
+	}
+	.car-form input:focus {
+		outline: none;
+		border-color: #e10600;
+	}
+	/* Hidden on screen, but read out by screen readers */
+	.visually-hidden {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		overflow: hidden;
+		clip: rect(0 0 0 0);
+	}
+	.team-btn {
+		display: inline-block;
+		flex-shrink: 0;
+		font-size: 1rem;
+		cursor: pointer;
+		background-color: #e10600;
+		color: white;
+		padding: 1rem 2rem;
+		border: 2px solid #e10600;
+		border-radius: 8px;
+		text-decoration: none;
+		font-weight: bold;
+		transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+	}
+	.team-btn:hover {
+		transform: translateY(-3px);
+		background-color: rgba(225, 6, 0, 0.35);
+		box-shadow: 0 8px 20px rgba(225, 6, 0, 0.4);
+	}
+
+	/* 2 across on tablets, 1 on phones */
+	@media (max-width: 1000px) {
+		.service-grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+	@media (max-width: 560px) {
+		.service-grid {
+			grid-template-columns: 1fr;
+		}
+		h1 {
+			font-size: 3rem;
+		}
+		.not-sure {
+			flex-direction: column;
+			align-items: flex-start;
+			width: calc(100% - 2rem);
+			margin: 0 auto 4rem;
+		}
+		.car-form {
+			flex-direction: column;
+			width: 100%;
+		}
+		.car-form input {
+			width: 100%;
+			box-sizing: border-box;
+			padding: 1rem;
+		}
+	}
 </style>
+
+<script>
+	// When the form is sent, open a text message that already includes their car
+	const form = document.querySelector<HTMLFormElement>("#car-form");
+	const carInput = document.querySelector<HTMLInputElement>("#car");
+
+	form?.addEventListener("submit", (event) => {
+		event.preventDefault();
+		const car = carInput?.value.trim() ?? "";
+		const message = `Hi Apex Garage, I drive a ${car} and I'm not sure what I need. Can you help?`;
+		window.location.href = `sms:+61400000000?&body=${encodeURIComponent(message)}`;
+	});
+</script>
